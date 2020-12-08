@@ -5,6 +5,7 @@
  */
 
 #include "ngx_shmtx.h"
+#include "config.h"
 
 
 static void ngx_shmtx_wakeup(ngx_shmtx_t *mtx);

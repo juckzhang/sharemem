@@ -8,7 +8,8 @@
 #ifndef _NGX_SLAB_H_INCLUDED_
 #define _NGX_SLAB_H_INCLUDED_
 
-#include "shmx/ngx_shmtx.h"
+#include "ngx_shmtx.h"
+#include "config.h"
 
 
 typedef struct ngx_slab_page_s  ngx_slab_page_t;

@@ -12,11 +12,12 @@
 #define NGX_HAVE_MAP_DEVZERO 1
 #define NGX_HAVE_SYSVSHM 1
 
+#include "config.h"
+
 typedef struct {
     u_char      *addr;
     size_t       size;
-    ngx_str_t    name;
-    ngx_log_t   *log;
+    u_char    *name;
     ngx_uint_t   exists;   /* unsigned  exists:1;  */
 } ngx_shm_t;
 

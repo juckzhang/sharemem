@@ -6,6 +6,7 @@
 
 
 #include "ngx_shmem.h"
+#include "config.h"
 
 
 #if (NGX_HAVE_MAP_ANON)

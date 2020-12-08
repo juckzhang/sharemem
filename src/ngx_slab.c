@@ -5,6 +5,7 @@
  */
 
 #include "ngx_slab.h"
+#include "config.h"
 
 #define NGX_SLAB_PAGE_MASK   3
 #define NGX_SLAB_PAGE        0
@@ -78,11 +79,13 @@ static void ngx_slab_error(ngx_slab_pool_t *pool, ngx_uint_t level,
 static ngx_uint_t  ngx_slab_max_size;
 static ngx_uint_t  ngx_slab_exact_size;
 static ngx_uint_t  ngx_slab_exact_shift;
+static ngx_uint_t  ngx_pagesize;
 
 
 void
 ngx_slab_sizes_init(void)
 {
+    ngx_pagesize = getpagesize();
     ngx_uint_t  n;
 
     ngx_slab_max_size = ngx_pagesize / 2;
