@@ -12,6 +12,8 @@
 #define NGX_RWLOCK_SPIN   2048
 #define NGX_RWLOCK_WLOCK  ((ngx_atomic_uint_t) -1)
 
+static ngx_int_t    ngx_ncpu;
+
 
 void
 ngx_rwlock_wlock(ngx_atomic_t *lock)

@@ -18,7 +18,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-typedef uintptr_t       ngx_uint_t;
+typedef intptr_t    ngx_int_t;
+typedef uintptr_t   ngx_uint_t;
 typedef pid_t       ngx_pid_t;
 
 #endif //SHAREMEM_CONFIG_H
