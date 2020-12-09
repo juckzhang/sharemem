@@ -20,7 +20,7 @@ ngx_shm_alloc(ngx_shm_t *shm)
 
     if (shm->addr == MAP_FAILED) {
 //        ngx_log_error(NGX_LOG_ALERT, shm->log, ngx_errno,
-                      "mmap(MAP_ANON|MAP_SHARED, %uz) failed", shm->size);
+//                      "mmap(MAP_ANON|MAP_SHARED, %uz) failed", shm->size);
         return NGX_ERROR;
     }
 
@@ -33,7 +33,7 @@ ngx_shm_free(ngx_shm_t *shm)
 {
     if (munmap((void *) shm->addr, shm->size) == -1) {
 //        ngx_log_error(NGX_LOG_ALERT, shm->log, ngx_errno,
-                      "munmap(%p, %uz) failed", shm->addr, shm->size);
+//                      "munmap(%p, %uz) failed", shm->addr, shm->size);
     }
 }
 

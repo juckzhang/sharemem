@@ -9,8 +9,8 @@
 #define _NGX_RWLOCK_H_INCLUDED_
 
 
-#include <ngx_config.h>
-#include <ngx_core.h>
+#include "config.h"
+#include "ngx_shmtx.h"
 
 
 void ngx_rwlock_wlock(ngx_atomic_t *lock);
