@@ -14,6 +14,7 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <string.h>
 
 #define NGX_OK 0
 #define NGX_ERROR -1
@@ -35,6 +36,6 @@ typedef intptr_t    ngx_int_t;
 typedef uintptr_t   ngx_uint_t;
 typedef pid_t       ngx_pid_t;
 
-extern ngx_int_t    ngx_ncpu;
+static ngx_int_t    ngx_ncpu;
 
 #endif //SHAREMEM_CONFIG_H
