@@ -8,10 +8,6 @@
 #ifndef _NGX_SHMEM_H_INCLUDED_
 #define _NGX_SHMEM_H_INCLUDED_
 
-#define NGX_HAVE_MAP_ANON 1
-#define NGX_HAVE_MAP_DEVZERO 1
-#define NGX_HAVE_SYSVSHM 1
-
 #include "config.h"
 
 typedef struct {

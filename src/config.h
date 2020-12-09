@@ -19,17 +19,55 @@
 #define NGX_OK 0
 #define NGX_ERROR -1
 #define NGX_EINTR EINTR
-#define NGX_HAVE_ATOMIC_OPS 1
 #define ngx_memzero(buf, n)       (void) memset(buf, 0, n)
+
+#ifndef NGX_HAVE_ATOMIC_OPS
+#define NGX_HAVE_ATOMIC_OPS 1
+#endif
+
+#ifndef NGX_HAVE_SCHED_YIELD
+#define NGX_HAVE_SCHED_YIELD  1
+#endif
+
+#ifndef NGX_HAVE_MAP_ANON
+#define NGX_HAVE_MAP_ANON 1
+#endif
+
+#ifndef NGX_HAVE_MAP_DEVZERO
+#define NGX_HAVE_MAP_DEVZERO 1
+#endif
+
+#ifndef NGX_HAVE_SYSVSHM
+#define NGX_HAVE_SYSVSHM 1
+#endif
+
+#define ngx_atomic_cmp_set(lock, old, set)                                    \
+    __sync_bool_compare_and_swap(lock, old, set)
+
+#define ngx_atomic_fetch_add(value, add)                                      \
+    __sync_fetch_and_add(value, add)
+
+#define ngx_memory_barrier()        __sync_synchronize()
+
+
+#define ngx_trylock(lock)  (*(lock) == 0 && ngx_atomic_cmp_set(lock, 0, 1))
+#define ngx_unlock(lock)    *(lock) = 0
 
 #define ngx_align(d, a)     (((d) + (a - 1)) & ~(a - 1))
 #define ngx_align_ptr(p, a)                                                   \
     (u_char *) (((uintptr_t) (p) + ((uintptr_t) a - 1)) & ~((uintptr_t) a - 1))
 
 #if (NGX_HAVE_SCHED_YIELD)
+#include <sched.h>
 #define ngx_sched_yield()  sched_yield()
 #else
 #define ngx_sched_yield()  usleep(1)
+#endif
+
+#if ( __i386__ || __i386 || __amd64__ || __amd64 )
+#define ngx_cpu_pause()             __asm__ ("pause")
+#else
+#define ngx_cpu_pause()
 #endif
 
 typedef intptr_t    ngx_int_t;
