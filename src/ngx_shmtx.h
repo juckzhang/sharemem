@@ -9,6 +9,7 @@
 #define _NGX_SHMTX_H_INCLUDED_
 
 #include "config.h"
+#include <semaphore.h>
 /* GCC 4.1 builtin atomic operations */
 
 #define NGX_HAVE_ATOMIC_OPS  1
