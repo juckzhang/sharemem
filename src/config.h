@@ -15,7 +15,6 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
-#include <process.h>
 
 #define NGX_OK 0
 #define NGX_ERROR -1
