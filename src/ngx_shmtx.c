@@ -9,7 +9,8 @@
 
 
 static void ngx_shmtx_wakeup(ngx_shmtx_t *mtx);
-static ngx_pid_t ngx_pid;
+
+extern ngx_pid_t ngx_pid;
 
 
 ngx_int_t
