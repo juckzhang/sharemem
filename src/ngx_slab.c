@@ -107,9 +107,9 @@ ngx_init_zone_pool(ngx_shm_t *shm)
 {
     ngx_slab_pool_t  *sp;
 
-    sp = (ngx_slab_pool_t *) shm.addr;
+    sp = (ngx_slab_pool_t *) shm->addr;
 
-    if (shm.exists) {
+    if (shm->exists) {
 
         if (sp == sp->addr) {
             return NGX_OK;
@@ -121,9 +121,9 @@ ngx_init_zone_pool(ngx_shm_t *shm)
         return NGX_ERROR;
     }
 
-    sp->end = shm.addr + shm.size;
+    sp->end = shm->addr + shm->size;
     sp->min_shift = 3;
-    sp->addr = shm.addr;
+    sp->addr = shm->addr;
 
 
     if (ngx_shmtx_create(&sp->mutex, &sp->lock, NULL) != NGX_OK) {
