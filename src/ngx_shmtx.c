@@ -16,6 +16,8 @@ extern ngx_pid_t ngx_pid;
 ngx_int_t
 ngx_shmtx_create(ngx_shmtx_t *mtx, ngx_shmtx_sh_t *addr, u_char *name)
 {
+    init_ncpu();
+//    init_pid();
     mtx->lock = &addr->lock;
 
     if (mtx->spin == (ngx_uint_t) -1) {

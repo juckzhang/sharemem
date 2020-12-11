@@ -6,6 +6,7 @@
 
 #include "ngx_slab.h"
 #include "config.h"
+#include "ngx_shmem.h"
 
 #define NGX_SLAB_PAGE_MASK   3
 #define NGX_SLAB_PAGE        0
@@ -101,6 +102,38 @@ ngx_slab_sizes_init(void)
     }
 }
 
+static ngx_int_t
+ngx_init_zone_pool(ngx_shm_t *shm)
+{
+    ngx_slab_pool_t  *sp;
+
+    sp = (ngx_slab_pool_t *) shm.addr;
+
+    if (shm.exists) {
+
+        if (sp == sp->addr) {
+            return NGX_OK;
+        }
+
+//        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+//                      "shared zone \"%V\" has no equal addresses: %p vs %p",
+//                      &zn->shm.name, sp->addr, sp);
+        return NGX_ERROR;
+    }
+
+    sp->end = shm.addr + shm.size;
+    sp->min_shift = 3;
+    sp->addr = shm.addr;
+
+
+    if (ngx_shmtx_create(&sp->mutex, &sp->lock, NULL) != NGX_OK) {
+        return NGX_ERROR;
+    }
+
+    ngx_slab_init(sp);
+
+    return NGX_OK;
+}
 
 void
 ngx_slab_init(ngx_slab_pool_t *pool)
