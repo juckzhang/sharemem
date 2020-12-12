@@ -45,6 +45,10 @@
 #define NGX_HAVE_SC_NPROCESSORS_ONLN 1
 #endif
 
+#ifndef ngx_inline
+#define ngx_inline      inline
+#endif
+
 #define ngx_atomic_cmp_set(lock, old, set)                                    \
     __sync_bool_compare_and_swap(lock, old, set)
 
