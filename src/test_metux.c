@@ -12,6 +12,7 @@ int print_info(void);
 
 ngx_shm_t shm;
 ngx_shmtx_sh_t *atomic;
+
 ngx_shmtx_t *mtx;
 int *num;
 int proc_num = 100;
@@ -67,6 +68,7 @@ int test_slab(void){
 int print_info(void){
     int i = 0;
     pid_t pid;
+    int tmp = 0;
 
     for(; i < proc_num; ++i){
         pid = fork();
@@ -77,7 +79,8 @@ int print_info(void){
             for(i = 0; i < incr_num; ++i){
                 printf("进程{%d},第{%d}次操作自增前的值: %d\n",ngx_pid, i, *num);
                 ngx_shmtx_lock(mtx);
-                *num = *num + 1;
+                tmp = *num;
+                *num = tmp + 1;
                 ngx_shmtx_unlock(mtx);
                 printf("进程{%d},第{%d}次操作自增后的值: %d\n",ngx_pid, i, *num);
             }
@@ -107,11 +110,11 @@ int print_info(void){
 int main(void){
     init_pid();
     int res;
-    char *name = "test_metux";
-//    char *name = "test_slab";
+//    char *name = "test_metux";
+    char *name = "test_slab";
 
-    res = test_metux();
-//    res = test_slab();
+//    res = test_metux();
+    res = test_slab();
     printf("--------- %s --------\n",name);
 
     return res;

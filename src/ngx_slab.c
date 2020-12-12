@@ -105,6 +105,7 @@ ngx_slab_sizes_init(void)
 ngx_int_t
 ngx_init_zone_pool(ngx_shm_t *shm)
 {
+    ngx_shm_alloc(shm);
     ngx_slab_pool_t  *sp;
 
     sp = (ngx_slab_pool_t *) shm->addr;
