@@ -13,7 +13,6 @@ Makefile
 CMakeCache.txt
 *.log
 *.dump
-test
 demo
 main
 snap
