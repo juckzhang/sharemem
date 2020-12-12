@@ -102,7 +102,7 @@ ngx_slab_sizes_init(void)
     }
 }
 
-static ngx_int_t
+ngx_int_t
 ngx_init_zone_pool(ngx_shm_t *shm)
 {
     ngx_slab_pool_t  *sp;

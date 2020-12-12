@@ -10,6 +10,7 @@
 
 #include "ngx_shmtx.h"
 #include "config.h"
+#include "ngx_shmem.h"
 
 
 typedef struct ngx_slab_page_s  ngx_slab_page_t;
@@ -57,7 +58,7 @@ typedef struct {
     void             *addr;
 } ngx_slab_pool_t;
 
-
+ngx_int_t ngx_init_zone_pool(ngx_shm_t *shm);
 void ngx_slab_sizes_init(void);
 void ngx_slab_init(ngx_slab_pool_t *pool);
 void *ngx_slab_alloc(ngx_slab_pool_t *pool, size_t size);

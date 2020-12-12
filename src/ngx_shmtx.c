@@ -7,7 +7,6 @@
 #include "ngx_shmtx.h"
 #include "config.h"
 
-
 static void ngx_shmtx_wakeup(ngx_shmtx_t *mtx);
 
 extern ngx_pid_t ngx_pid;
