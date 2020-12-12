@@ -42,7 +42,8 @@ int test_metux(void){
 
 int test_slab(void){
     ngx_int_t res;
-
+    shm.size = 1*1024*1024;
+    ngx_slab_sizes_init();
     res = ngx_init_zone_pool(&shm);
     if(res != NGX_OK){
         printf("初始化内存失败!\n");
@@ -105,8 +106,13 @@ int print_info(void){
 
 int main(void){
     init_pid();
+    int res;
+    char *name = "test_metux";
+//    char *name = "test_slab";
 
-    return test_metux();
+    res = test_metux();
+//    res = test_slab();
+    printf("--------- %s --------\n",name);
 
-//    return test_slab();
+    return res;
 }

@@ -143,7 +143,6 @@ ngx_slab_init(ngx_slab_pool_t *pool)
     ngx_int_t         m;
     ngx_uint_t        i, n, pages;
     ngx_slab_page_t  *slots, *page;
-
     pool->min_size = (size_t) 1 << pool->min_shift;
 
     slots = ngx_slab_slots(pool);
