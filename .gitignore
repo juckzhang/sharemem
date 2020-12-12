@@ -30,3 +30,4 @@ logs
 !/ext/PHP/discovery.php
 /.idea
 cmake-build/debug
+bin
