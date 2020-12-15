@@ -23,3 +23,6 @@ link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 add_executable(${EXE_OBJ} ${PROJECT_SOURCE_DIR}/test/test.c)
 TARGET_LINK_LIBRARIES(${EXE_OBJ} ${PROJECT_NAME})
+
+add_executable(tree ${PROJECT_SOURCE_DIR}/test/tree.c)
+TARGET_LINK_LIBRARIES(tree ${PROJECT_NAME})

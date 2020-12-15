@@ -39,6 +39,15 @@ struct ngx_rbtree_s {
     ngx_rbtree_insert_pt   insert;
 };
 
+#define ngx_rbt_red(node)               ((node)->color = 1)
+#define ngx_rbt_black(node)             ((node)->color = 0)
+#define ngx_rbt_is_red(node)            ((node)->color)
+#define ngx_rbt_is_black(node)          (!ngx_rbt_is_red(node))
+#define ngx_rbt_copy_color(n1, n2)      (n1->color = n2->color)
+
+/* a sentinel must be black */
+
+#define ngx_rbtree_sentinel_init(node)  ngx_rbt_black(node)
 
 #define ngx_rbtree_init(tree, s, i)                                           \
     ngx_rbtree_sentinel_init(s);                                              \
@@ -55,18 +64,6 @@ void ngx_rbtree_insert_timer_value(ngx_rbtree_node_t *root,
     ngx_rbtree_node_t *node, ngx_rbtree_node_t *sentinel);
 ngx_rbtree_node_t *ngx_rbtree_next(ngx_rbtree_t *tree,
     ngx_rbtree_node_t *node);
-
-
-#define ngx_rbt_red(node)               ((node)->color = 1)
-#define ngx_rbt_black(node)             ((node)->color = 0)
-#define ngx_rbt_is_red(node)            ((node)->color)
-#define ngx_rbt_is_black(node)          (!ngx_rbt_is_red(node))
-#define ngx_rbt_copy_color(n1, n2)      (n1->color = n2->color)
-
-
-/* a sentinel must be black */
-
-#define ngx_rbtree_sentinel_init(node)  ngx_rbt_black(node)
 
 
 static ngx_inline ngx_rbtree_node_t *
